@@ -1,11 +1,6 @@
 '''
 See https://alerts.weather.gov/ for complete zone list
-
-The ATOM and CAP feeds are updated about every two minutes.
 '''
-import datetime
-import time
-
 from nws import NWS
 
 nws = NWS()
@@ -16,7 +11,7 @@ def MyStateAlertSevere(entry):
     print('MyStateAlertSevere(', entry)
 
 
-@nws.alert(zone='NCC101', severity='Severe')
+@nws.alert(zone='NCC101', severity='Severe')  # See https://alerts.weather.gov/ for complete zone list
 def MyZoneAlert(entry):
     print('MyZoneAlert(', entry)
 
