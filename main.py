@@ -1,28 +1,34 @@
 '''
 See https://alerts.weather.gov/ for complete zone list
 '''
-from nws import NWS
+from nws_alerts import NWS
 
 nws = NWS()
 
 
+# Subscribe to alerts in North Carolina with severity "Moderate" or "Severe"
+@nws.alert(state='NC', severity='Severe')
 @nws.alert(state='NC', severity='Moderate')
-def MyStateAlertSevere(entry):
-    print('MyStateAlertSevere(', entry)
+def MyStateAlert(entry):
+    print('MyStateAlert(', entry.severity, entry.title)
 
 
-@nws.alert(zone='NCC101', severity='Severe')  # See https://alerts.weather.gov/ for complete zone list
+# Subscribe to events in my "zone" with severity
+@nws.alert(zone='NCC101', urgency='Immediate')  # See https://alerts.weather.gov/ for complete zone list
 def MyZoneAlert(entry):
-    print('MyZoneAlert(', entry)
+    print('MyZoneAlert(', entry.urgency, entry.title)
 
 
-print('nowAlerts=')
-nowAlerts = nws.NowAlerts()  # only returns events you have subscribed to with @nws.alert
+# nws_alerts.NowAlerts() will return any event happening now. It will not return future or past events.
+# Only events from states/zones you have subscribed to with @nws_alerts.alert will be included.
+# This will return all events regardless of severity, certainty, or urgency
+nowAlerts = nws.NowAlerts()
+
 for entry in nowAlerts:
     print('now entry=', entry)
-    print('urgency=', entry.severity)
+    print('severity=', entry.severity)
     print('urgency=', entry.urgency)
-    print('urgency=', entry.certainty)
+    print('certainty=', entry.certainty)
 
     if entry.severity == 'Severe':
         print('!!!!!!!!!!!!!!!!!!!!!!!! SEVERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!')

@@ -37,6 +37,7 @@ class NWS:
             sub = Subscription(kwargs=kwargs, callback=a[0])
             self._subscriptions.append(sub)
             sub.Update()
+            return a[0]
 
         return NewFunc
 
