@@ -48,6 +48,20 @@ Notes
 The @nws.alert decorator will only be triggered once per NWS alert.
 The alerts are logged to a JSON file in the current directory so that the code will remember which alerts have already been triggered.
 
+Synchronous Subscriptions
+=========================
+
+You can update the subscriptions on the fly by creating a Subscription object and calling the .Update()
+
+::
+
+    sub = Subscription(state='NC', severity='Moderate')
+    entries = sub.Update()
+    print('entries=', entries)
+
+    >>> entries= [<nwscapparser3.nws_cap_parser.CAPEntry object at 0x00000225DD91C7C0>, <nwscapparser3.nws_cap_parser.CAPEntry object at 0x00000225DD91C6A0>]
+
+
 Event Attributes
 ================
 
