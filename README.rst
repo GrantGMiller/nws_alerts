@@ -42,6 +42,12 @@ Usage
     for entry in nowAlerts:
         print('now entry=', entry)
 
+Notes
+=====
+
+The @nws.alert decorator will only be triggered once per NWS alert.
+The alerts are logged to a JSON file in the current directory so that the code will remember which alerts have already been triggered.
+
 Event Attributes
 ================
 
