@@ -31,15 +31,19 @@ class NWS:
         self._timer.start()
 
     def alert(self, *a, **kwargs):
-        kwargs = dict((k.lower(), v.lower()) for k, v, in kwargs.items())
+        # use this as a decorator
+
 
         def NewFunc(*a, **k):
-            sub = Subscription(kwargs=kwargs, callback=a[0])
+            sub = Subscription(callback=a[0], **kwargs)
             self._subscriptions.append(sub)
             sub.Update()
             return a[0]
 
         return NewFunc
+
+    def Subscribe(self, **kwargs):
+        sub = Subscription(**kwargs)
 
     def Update(self):
         for sub in self._subscriptions:

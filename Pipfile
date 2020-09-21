@@ -7,6 +7,7 @@ verify_ssl = true
 
 [packages]
 nwscapparser3 = "*"
+twine = "*"
 
 [requires]
 python_version = "3.8"
